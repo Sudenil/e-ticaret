@@ -21,9 +21,6 @@ namespace ETicaret.Api.Models
         [BsonElement("category")]
         public string Category { get; set; } = null!;
 
-        [BsonElement("gender")]
-        public string? Gender { get; set; }
-
         [BsonElement("stock")]
         public int Stock { get; set; }
 
