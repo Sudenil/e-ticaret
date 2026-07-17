@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\suden\\eticaret-proje\\ETicaret.Api\\ETicaret.Api.csproj": {}
+    "C:\\Users\\suden\\OneDrive\\Desktop\\metin kaydedici\\e-ticaret\\ETicaret.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\suden\\eticaret-proje\\ETicaret.Api\\ETicaret.Api.csproj": {
+    "C:\\Users\\suden\\OneDrive\\Desktop\\metin kaydedici\\e-ticaret\\ETicaret.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\suden\\eticaret-proje\\ETicaret.Api\\ETicaret.Api.csproj",
+        "projectUniqueName": "C:\\Users\\suden\\OneDrive\\Desktop\\metin kaydedici\\e-ticaret\\ETicaret.Api.csproj",
         "projectName": "ETicaret.Api",
-        "projectPath": "C:\\Users\\suden\\eticaret-proje\\ETicaret.Api\\ETicaret.Api.csproj",
+        "projectPath": "C:\\Users\\suden\\OneDrive\\Desktop\\metin kaydedici\\e-ticaret\\ETicaret.Api.csproj",
         "packagesPath": "C:\\Users\\suden\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\suden\\eticaret-proje\\ETicaret.Api\\obj\\",
+        "outputPath": "C:\\Users\\suden\\OneDrive\\Desktop\\metin kaydedici\\e-ticaret\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
