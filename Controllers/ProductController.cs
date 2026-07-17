@@ -37,11 +37,24 @@ namespace ETicaret.Api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
+        [HttpPut("{id}/image")]
+        public async Task<IActionResult> UpdateImage(string id, [FromBody] UpdateImageRequest request)
+        {
+            var updated = await _service.UpdateImageAsync(id, request.ImageUrl);
+            if (updated == null) return NotFound();
+            return Ok(updated);
+        }
+
         [HttpGet("search")]
         public async Task<IActionResult> Search([FromQuery] string? category, [FromQuery] string? keyword)
         {
             var products = await _service.SearchAsync(category, keyword);
             return Ok(products);
         }
+    }
+
+    public class UpdateImageRequest
+    {
+        public string ImageUrl { get; set; } = null!;
     }
 }

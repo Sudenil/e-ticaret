@@ -25,6 +25,13 @@ namespace ETicaret.Api.Services
             return product;
         }
 
+        public async Task<Product?> UpdateImageAsync(string id, string imageUrl)
+        {
+            var update = Builders<Product>.Update.Set(p => p.ImageUrl, imageUrl);
+            await _provider.Products.UpdateOneAsync(p => p.Id == id, update);
+            return await GetByIdAsync(id);
+        }
+
         public async Task<List<Product>> SearchAsync(string? category, string? keyword)
         {
             var filterBuilder = Builders<Product>.Filter;
