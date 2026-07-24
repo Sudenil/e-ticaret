@@ -26,7 +26,13 @@ namespace ETicaret.Api.Controllers
         {
             try
             {
-                var cart = await _service.AddItemAsync(customerId, request.ProductId, request.Quantity);
+                var cart = await _service.AddItemAsync(
+                    customerId,
+                    request.ProductId,
+                    request.Quantity,
+                    request.Size
+                );
+
                 return Ok(cart);
             }
             catch (Exception ex)
@@ -47,5 +53,8 @@ namespace ETicaret.Api.Controllers
     {
         public string ProductId { get; set; } = null!;
         public int Quantity { get; set; }
+
+        // Seçilen beden
+        public string? Size { get; set; }
     }
 }

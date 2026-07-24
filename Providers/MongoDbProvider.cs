@@ -19,7 +19,11 @@ namespace ETicaret.Api.Providers
 
         public IMongoCollection<Customer> Customers =>
             _database.GetCollection<Customer>("Customers");
+
         public IMongoCollection<Cart> Carts =>
             _database.GetCollection<Cart>("Carts");
+
+        public IMongoCollection<Favorite> Favorites =>
+            _database.GetCollection<Favorite>("Favorites");
     }
 }

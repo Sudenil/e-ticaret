@@ -16,6 +16,12 @@ namespace ETicaret.Api.Models
 
         [BsonElement("quantity")]
         public int Quantity { get; set; }
+
+        [BsonElement("size")]
+        public string? Size { get; set; }
+
+        [BsonElement("imageUrl")]
+        public string? ImageUrl { get; set; }
     }
 
     public class Cart
@@ -33,4 +39,5 @@ namespace ETicaret.Api.Models
         [BsonElement("updatedAt")]
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }
+    
 }

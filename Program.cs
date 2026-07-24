@@ -16,6 +16,18 @@ builder.Services.AddSingleton<MongoDbProvider>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<CartService>();
+builder.Services.AddSingleton<FavoriteService>();
+
+// CORS ekle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -27,6 +39,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// CORS middleware'i burada kullan (UseAuthorization'dan önce)
+app.UseCors("AllowAngular");
+
+app.UseStaticFiles();
+
 app.UseAuthorization();
 app.MapControllers();
 

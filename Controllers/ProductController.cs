@@ -22,11 +22,43 @@ namespace ETicaret.Api.Controllers
             return Ok(products);
         }
 
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetPaged(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 20)
+        {
+            var (items, totalCount) = await _service.GetPagedAsync(page, pageSize);
+            return Ok(new { items, totalCount });
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Search(
+            [FromQuery] string? category,
+            [FromQuery] string? subCategory,
+            [FromQuery] string? type,
+            [FromQuery] string? color,
+            [FromQuery] string? size,
+            [FromQuery] string? keyword)
+        {
+            var products = await _service.SearchAsync(
+                category,
+                subCategory,
+                type,
+                color,
+                size,
+                keyword);
+
+            return Ok(products);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var product = await _service.GetByIdAsync(id);
-            if (product == null) return NotFound();
+
+            if (product == null)
+                return NotFound();
+
             return Ok(product);
         }
 
@@ -35,13 +67,6 @@ namespace ETicaret.Api.Controllers
         {
             var created = await _service.CreateAsync(product);
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
-        }
-
-        [HttpGet("search")]
-        public async Task<IActionResult> Search([FromQuery] string? category, [FromQuery] string? keyword)
-        {
-            var products = await _service.SearchAsync(category, keyword);
-            return Ok(products);
         }
     }
 }

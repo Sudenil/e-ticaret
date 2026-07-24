@@ -28,16 +28,21 @@ namespace ETicaret.Api.Services
             return cart;
         }
 
-        public async Task<Cart> AddItemAsync(string customerId, string productId, int quantity)
+        public async Task<Cart> AddItemAsync(string customerId, string productId, int quantity, string? size)
         {
             var product = await _productService.GetByIdAsync(productId);
+
             if (product == null)
             {
                 throw new Exception("Ürün bulunamadı.");
             }
 
             var cart = await GetByCustomerIdAsync(customerId);
-            var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == productId);
+
+            // Aynı ürün ve aynı beden varsa miktarı artır
+            var existingItem = cart.Items.FirstOrDefault(i =>
+                i.ProductId == productId &&
+                i.Size == size);
 
             if (existingItem != null)
             {
@@ -50,23 +55,29 @@ namespace ETicaret.Api.Services
                     ProductId = productId,
                     ProductName = product.Name,
                     Price = product.Price,
-                    Quantity = quantity
+                    Quantity = quantity,
+                    Size = size,
+                    ImageUrl = product.ImageUrl
                 });
             }
 
             cart.UpdatedAt = DateTime.UtcNow;
 
             await _provider.Carts.ReplaceOneAsync(c => c.Id == cart.Id, cart);
+
             return cart;
         }
 
         public async Task<Cart> RemoveItemAsync(string customerId, string productId)
         {
             var cart = await GetByCustomerIdAsync(customerId);
+
             cart.Items.RemoveAll(i => i.ProductId == productId);
+
             cart.UpdatedAt = DateTime.UtcNow;
 
             await _provider.Carts.ReplaceOneAsync(c => c.Id == cart.Id, cart);
+
             return cart;
         }
     }
